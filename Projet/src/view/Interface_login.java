@@ -1,5 +1,4 @@
 package view;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
@@ -28,6 +27,9 @@ public class Interface_login extends JFrame {
 	// Server reference
 	private Serveur serveur;
 	
+	// Interface Reference
+	private Interface_Inscription inscription_Frame;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -50,6 +52,9 @@ public class Interface_login extends JFrame {
 	public Interface_login(Serveur serveur) {
 		// Reference the server
 		this.serveur = serveur;
+		
+		//Reference the other interfaces
+		inscription_Frame = null;
 		
 		// Init the Frame
 		setResizable(false);
@@ -91,7 +96,7 @@ public class Interface_login extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO : Lancer interface inscription ici
+				create_Inscription_Interface ();
 			}
 		});
 		
@@ -200,5 +205,20 @@ public class Interface_login extends JFrame {
 		}
 
 	    return null;
+	}
+	
+	public void create_Inscription_Interface (){
+		try{
+			inscription_Frame = new Interface_Inscription(this, serveur);
+			this.setVisible(false);
+			inscription_Frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void destroye_Child (Interface_Inscription child){
+		inscription_Frame.setVisible(false);
+		inscription_Frame = null;
 	}
 }

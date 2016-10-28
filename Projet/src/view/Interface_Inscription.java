@@ -1,27 +1,23 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
-
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import server.Serveur;
-
-import javax.swing.JTextField;
-import java.awt.GridLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
+import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
-import java.awt.Dimension;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import java.awt.Font;
+import javax.swing.border.EmptyBorder;
+
+import server.Serveur;
 
 public class Interface_Inscription extends JDialog {
 
@@ -35,25 +31,18 @@ public class Interface_Inscription extends JDialog {
 	// Server reference
 	private Serveur serveur;
 	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			Interface_Inscription dialog = new Interface_Inscription(new Serveur("trolley.yolo.cat", 3306));
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
+	// parent interface reference
+	private Interface_login parent;
+	
 	/**
 	 * Create the dialog.
 	 */
-	public Interface_Inscription(Serveur serveur) {
+	public Interface_Inscription(Interface_login parent, Serveur serveur) {
 		// Reference the server
 		this.serveur = serveur;
+		
+		// Reference the parent interface
+		this.parent = parent;
 		
 		//Init Frame
 		setResizable(false);
@@ -141,15 +130,7 @@ public class Interface_Inscription extends JDialog {
 
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
-						// set empty fields
-						textField.setText("");
-						textField_1.setText("");
-						textField_2.setText("");
-						textField_3.setText("");
-						textField_4.setText("");
-						
-						// back to sign up
-						
+						end_Frame();
 					}
 				});
 				buttonPane.add(cancelButton);
@@ -298,6 +279,12 @@ public class Interface_Inscription extends JDialog {
 		System.out.println("Membre added to data base");
 		
 		this.serveur.endConnection();
+		end_Frame();
 		return true;
+	}
+	
+	private void end_Frame (){
+		parent.setVisible(true);
+		parent.destroye_Child (this);
 	}
 }

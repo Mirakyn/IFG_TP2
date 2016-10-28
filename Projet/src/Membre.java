@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+import server.Serveur;
+
 public class Membre {
 	// Attributs
 	private String nom_Membre;

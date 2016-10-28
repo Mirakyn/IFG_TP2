@@ -2,5 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="C:/Users/Maxime/Desktop/Cours/UQAC-S7/Gestion_Projet/Projet_TP2/prog/IFG_TP2/JDBC-mysql-connector/mysql-connector-java-5.1.40-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Maxime/Desktop/Cours/UQAC-S7/Gestion_Projet/Projet_TP2/prog/IFG_TP2/commons-codec-1.10/commons-codec-1.10.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

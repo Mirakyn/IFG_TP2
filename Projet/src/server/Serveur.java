@@ -72,13 +72,32 @@ public class Serveur {
 		
 		try {
 			// Creation du 'statement'
+			this.stmt = this.con.createStatement();
+			
+			// Execution de la requete
+			result = this.stmt.executeQuery(query);
+		} catch (SQLException e ) { // Echec de la requete
+			e.printStackTrace();
+			result = null;
+		}
+		
+		return result;
+	}
+	
+	public int insert(String query)
+	{
+		this.stmt = null;
+		int result = 0;
+		
+		try {
+			// Creation du 'statement'
 	        this.stmt = this.con.createStatement();
 	        
 	        // Execution de la requete
-	        result = this.stmt.executeQuery(query);
+	        result = this.stmt.executeUpdate(query);
 		} catch (SQLException e ) { // Echec de la requete
 	    	e.printStackTrace();
-	    	result = null;
+	    	result = 0;
 		}
 		
 		return result;

@@ -122,6 +122,18 @@ public class Interface_login extends JFrame {
 		contentPane.add(lblPassword);
 	}
 	
+	/**
+	 * Hash the password to send to server
+	 * @param password to hash
+	 * @return password hashed
+	 */
+	private String hash_Password (String password){
+		
+		String hashed_Password = org.apache.commons.codec.digest.DigestUtils.sha256Hex(password);
+		
+		return hashed_Password;
+	}
+	
 	private Membre loginAccepter(String login, String password)
 	{
 		boolean estMembre = false;
@@ -172,7 +184,7 @@ public class Interface_login extends JFrame {
 			}
 			
 			// Verification du mot de passe.
-			passwordOK = BDpassword.equals(password);
+			passwordOK = BDpassword.equals(hash_Password(password));
 			
 			// Si le mot de passe est correct.
 			if (passwordOK)

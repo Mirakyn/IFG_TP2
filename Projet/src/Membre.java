@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+import model.Groupe;
 import server.Serveur;
 
 public class Membre {

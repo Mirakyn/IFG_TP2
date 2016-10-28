@@ -221,6 +221,10 @@ public class Interface_Inscription extends JDialog {
 	    }
 	}
 	
+	/**
+	 * Hash the password to send to server
+	 * @return password hashed
+	 */
 	private String hash_Password (){
 		String password = textField_2.getText();
 		

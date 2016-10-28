@@ -38,6 +38,9 @@ public class Interface_Inscription extends JDialog {
 	 * Create the dialog.
 	 */
 	public Interface_Inscription(Interface_login parent, Serveur serveur) {
+		// disable the close of the inscription frame by the user
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		
 		// Reference the server
 		this.serveur = serveur;
 		

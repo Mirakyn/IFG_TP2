@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -20,8 +21,8 @@ public class Interface_login extends JFrame {
 	
 	// UI elements
 	private JPanel contentPane;
-	private JTextField txtLogin;
-	private JTextField txtMdp;
+	private JTextField txtEmail;
+	private JPasswordField txtMdp;
 
 	// Server reference
 	private Serveur serveur;
@@ -70,7 +71,7 @@ public class Interface_login extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (loginAccepter(txtLogin.getText(), txtMdp.getText()))
+				if (loginAccepter(txtEmail.getText(), txtMdp.getText()))
 					System.out.println("Login");
 				else
 					System.out.println("Non login");
@@ -85,15 +86,15 @@ public class Interface_login extends JFrame {
 		
 		
 		// Login textfield
-		txtLogin = new JTextField();
-		txtLogin.setHorizontalAlignment(SwingConstants.CENTER);
-		txtLogin.setBounds(56, 72, 86, 20);
-		contentPane.add(txtLogin);
-		txtLogin.setColumns(10);
+		txtEmail = new JTextField();
+		txtEmail.setHorizontalAlignment(SwingConstants.CENTER);
+		txtEmail.setBounds(56, 72, 86, 20);
+		contentPane.add(txtEmail);
+		txtEmail.setColumns(10);
 		
 		
 		// Password textfield
-		txtMdp = new JTextField();
+		txtMdp = new JPasswordField();
 		txtMdp.setHorizontalAlignment(SwingConstants.CENTER);
 		txtMdp.setBounds(282, 72, 86, 20);
 		contentPane.add(txtMdp);
@@ -101,12 +102,12 @@ public class Interface_login extends JFrame {
 		
 		
 		// Labels
-		JLabel lblLogin = new JLabel("Username");
+		JLabel lblLogin = new JLabel("Email");
 		lblLogin.setBounds(56, 53, 61, 14);
 		contentPane.add(lblLogin);
 		
-		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setBounds(282, 53, 46, 14);
+		JLabel lblPassword = new JLabel("Mot de passe");
+		lblPassword.setBounds(282, 53, 100, 14);
 		contentPane.add(lblPassword);
 	}
 	

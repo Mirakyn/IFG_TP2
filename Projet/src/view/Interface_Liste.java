@@ -15,9 +15,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.Dimension;
 
-public class Interface_Liste extends JFrame {
+public class Interface_Liste extends JPanel {
 
-	private JPanel contentPane;
 
 	/**
 	 * Launch the application.
@@ -39,17 +38,12 @@ public class Interface_Liste extends JFrame {
 	 * Create the frame.
 	 */
 	public Interface_Liste() {
-		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
+		setBorder(new EmptyBorder(5, 5, 5, 5));
+		setLayout(new BorderLayout(0, 0));
 		
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
-		contentPane.add(splitPane, BorderLayout.WEST);
+		add(splitPane, BorderLayout.WEST);
 		
 		JSplitPane splitPane_1 = new JSplitPane();
 		splitPane_1.setMinimumSize(new Dimension(200, 25));
@@ -62,16 +56,16 @@ public class Interface_Liste extends JFrame {
 		JButton btnDelete = new JButton("Delete");
 		splitPane_1.setRightComponent(btnDelete);
 		
-		JList list = new JList();
+		JList<String> list = new JList<String>();
 		list.setMinimumSize(new Dimension(0, 200));
 		list.setMaximumSize(new Dimension(0, 200));
 		list.setPreferredSize(new Dimension(0, 180));
-		list.setModel(new AbstractListModel() {
+		list.setModel(new AbstractListModel<String>() {
 			String[] values = new String[] {"nom + quantite (1)", "nom + quantite (1)", "nom + quantite (1)", "nom + quantite (1)", "nom + quantite (1)"};
 			public int getSize() {
 				return values.length;
 			}
-			public Object getElementAt(int index) {
+			public String getElementAt(int index) {
 				return values[index];
 			}
 		});
@@ -79,7 +73,7 @@ public class Interface_Liste extends JFrame {
 		
 		JSplitPane splitPane_2 = new JSplitPane();
 		splitPane_2.setOrientation(JSplitPane.VERTICAL_SPLIT);
-		contentPane.add(splitPane_2, BorderLayout.EAST);
+		add(splitPane_2, BorderLayout.EAST);
 		
 		JSplitPane splitPane_3 = new JSplitPane();
 		splitPane_2.setRightComponent(splitPane_3);
@@ -96,16 +90,16 @@ public class Interface_Liste extends JFrame {
 		JButton btnAdd_1 = new JButton("Add");
 		splitPane_3.setLeftComponent(btnAdd_1);
 		
-		JList list_2 = new JList();
+		JList<String> list_2 = new JList<String>();
 		list_2.setPreferredSize(new Dimension(0, 180));
 		list_2.setMinimumSize(new Dimension(0, 175));
 		list_2.setMaximumSize(new Dimension(0, 200));
-		list_2.setModel(new AbstractListModel() {
+		list_2.setModel(new AbstractListModel<String>() {
 			String[] values = new String[] {"name", "prix", "qtt", "descript"};
 			public int getSize() {
 				return values.length;
 			}
-			public Object getElementAt(int index) {
+			public String getElementAt(int index) {
 				return values[index];
 			}
 		});
@@ -113,17 +107,17 @@ public class Interface_Liste extends JFrame {
 		
 		JSplitPane splitPane_5 = new JSplitPane();
 		splitPane_5.setOrientation(JSplitPane.VERTICAL_SPLIT);
-		contentPane.add(splitPane_5, BorderLayout.CENTER);
+		add(splitPane_5, BorderLayout.CENTER);
 		
-		JList list_1 = new JList();
+		JList<String> list_1 = new JList<String>();
 		list_1.setPreferredSize(new Dimension(0, 180));
 		list_1.setMinimumSize(new Dimension(0, 200));
-		list_1.setModel(new AbstractListModel() {
+		list_1.setModel(new AbstractListModel<String>() {
 			String[] values = new String[] {"name product", "name product", "name product", "name product", "name product", "name product"};
 			public int getSize() {
 				return values.length;
 			}
-			public Object getElementAt(int index) {
+			public String getElementAt(int index) {
 				return values[index];
 			}
 		});
@@ -135,7 +129,7 @@ public class Interface_Liste extends JFrame {
 		
 		JSplitPane splitPane_6 = new JSplitPane();
 		splitPane_6.setOrientation(JSplitPane.VERTICAL_SPLIT);
-		contentPane.add(splitPane_6, BorderLayout.NORTH);
+		add(splitPane_6, BorderLayout.NORTH);
 		
 		JSplitPane splitPane_7 = new JSplitPane();
 		splitPane_6.setRightComponent(splitPane_7);

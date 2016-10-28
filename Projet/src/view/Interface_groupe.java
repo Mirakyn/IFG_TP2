@@ -1,28 +1,20 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JScrollPane;
-import javax.swing.JList;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
 import javax.swing.AbstractListModel;
-import javax.swing.JTextField;
-import java.awt.Dimension;
-import javax.swing.SwingConstants;
-import java.awt.Component;
-import javax.swing.JLabel;
-import javax.swing.JInternalFrame;
-import javax.swing.JSplitPane;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
-public class Interface_groupe extends JFrame {
-
-	private JPanel contentPane;
+public class Interface_groupe extends JPanel {
 
 	/**
 	 * Launch the application.
@@ -44,17 +36,14 @@ public class Interface_groupe extends JFrame {
 	 * Create the frame.
 	 */
 	public Interface_groupe() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setPreferredSize(new Dimension(20, 10));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
+		setPreferredSize(new Dimension(20, 10));
+		setBorder(new EmptyBorder(5, 5, 5, 5));
+		setLayout(new BorderLayout(0, 0));
 		
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
-		contentPane.add(splitPane, BorderLayout.WEST);
+		add(splitPane, BorderLayout.WEST);
 		
 		JSplitPane splitPane_1 = new JSplitPane();
 		splitPane_1.setMaximumSize(new Dimension(20, 20));
@@ -80,17 +69,17 @@ public class Interface_groupe extends JFrame {
 		splitPane_2.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		splitPane.setLeftComponent(splitPane_2);
 		
-		JList list = new JList();
+		JList<String> list = new JList<String>();
 		list.setPreferredSize(new Dimension(0, 175));
 		list.setSize(new Dimension(0, 25));
 		list.setMaximumSize(new Dimension(0, 10));
 		list.setMinimumSize(new Dimension(0, 175));
-		list.setModel(new AbstractListModel() {
+		list.setModel(new AbstractListModel<String>() {
 			String[] values = new String[] {"Group 1", "Group 2", "Group 3", "..."};
 			public int getSize() {
 				return values.length;
 			}
-			public Object getElementAt(int index) {
+			public String getElementAt(int index) {
 				return values[index];
 			}
 		});
@@ -102,14 +91,14 @@ public class Interface_groupe extends JFrame {
 		splitPane_2.setLeftComponent(lblGroupesAssocis);
 		
 		JPanel panel = new JPanel();
-		contentPane.add(panel, BorderLayout.NORTH);
+		add(panel, BorderLayout.NORTH);
 		
 		JLabel lblGestionDesGroupes = new JLabel("Gestion des groupes");
 		panel.add(lblGestionDesGroupes);
 		
 		JSplitPane splitPane_3 = new JSplitPane();
 		splitPane_3.setOrientation(JSplitPane.VERTICAL_SPLIT);
-		contentPane.add(splitPane_3, BorderLayout.EAST);
+		add(splitPane_3, BorderLayout.EAST);
 		
 		JSplitPane splitPane_5 = new JSplitPane();
 		splitPane_5.setOrientation(JSplitPane.VERTICAL_SPLIT);
@@ -120,16 +109,16 @@ public class Interface_groupe extends JFrame {
 		lblNewLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		splitPane_5.setLeftComponent(lblNewLabel);
 		
-		JList list_1 = new JList();
+		JList<String> list_1 = new JList<String>();
 		list_1.setPreferredSize(new Dimension(100, 175));
 		list_1.setMaximumSize(new Dimension(2000, 2000));
 		list_1.setMinimumSize(new Dimension(100, 175));
-		list_1.setModel(new AbstractListModel() {
+		list_1.setModel(new AbstractListModel<String>() {
 			String[] values = new String[] {"Member 1", "Member 2", "Member 3", "Member 4", "..."};
 			public int getSize() {
 				return values.length;
 			}
-			public Object getElementAt(int index) {
+			public String getElementAt(int index) {
 				return values[index];
 			}
 		});
@@ -140,7 +129,7 @@ public class Interface_groupe extends JFrame {
 		
 		JSplitPane splitPane_4 = new JSplitPane();
 		splitPane_4.setOrientation(JSplitPane.VERTICAL_SPLIT);
-		contentPane.add(splitPane_4, BorderLayout.CENTER);
+		add(splitPane_4, BorderLayout.CENTER);
 		
 		JSplitPane splitPane_6 = new JSplitPane();
 		splitPane_6.setOrientation(JSplitPane.VERTICAL_SPLIT);
@@ -150,14 +139,14 @@ public class Interface_groupe extends JFrame {
 		lblunknown.setHorizontalAlignment(SwingConstants.CENTER);
 		splitPane_6.setLeftComponent(lblunknown);
 		
-		JList list_2 = new JList();
+		JList<String> list_2 = new JList<String>();
 		list_2.setPreferredSize(new Dimension(0, 175));
-		list_2.setModel(new AbstractListModel() {
+		list_2.setModel(new AbstractListModel<String>() {
 			String[] values = new String[] {"dsf", "sdfsdf", "sdfs", "dfsd", "fds", "fsdf"};
 			public int getSize() {
 				return values.length;
 			}
-			public Object getElementAt(int index) {
+			public String getElementAt(int index) {
 				return values[index];
 			}
 		});

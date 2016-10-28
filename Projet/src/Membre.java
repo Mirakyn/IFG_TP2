@@ -48,7 +48,4 @@ public class Membre {
 		this.groupes.add(toAdd);
 	}
 	
-	public Groupe get_Groupe (){
-		return new Groupe(); // TODO: A changer pour trouver le grp demandé
-	}
 }

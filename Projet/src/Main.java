@@ -1,6 +1,7 @@
 import java.awt.EventQueue;
 
 import server.Serveur;
+import view.Interface_Manager;
 import view.Interface_login;
 
 public class Main {
@@ -10,12 +11,7 @@ public class Main {
 			public void run() {
 				Serveur serveur = new Serveur("trolley.yolo.cat", 3306);
 				
-				try {
-					Interface_login frame = new Interface_login(serveur);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				Interface_Manager manager = new Interface_Manager(serveur);
 			}
 		});
 	}

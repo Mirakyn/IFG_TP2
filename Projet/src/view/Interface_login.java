@@ -25,6 +25,7 @@ public class Interface_login extends JFrame {
 	private JPasswordField txtMdp;
 
 	// Server reference
+	private Interface_Manager parent;
 	private Serveur serveur;
 	
 	// Interface Reference
@@ -49,8 +50,9 @@ public class Interface_login extends JFrame {
 	/**
 	 * Create the frame and init elements.
 	 */
-	public Interface_login(Serveur serveur) {
-		// Reference the server
+	public Interface_login(Interface_Manager parent, Serveur serveur) {
+		// Reference the parent & server
+		this.parent = parent;
 		this.serveur = serveur;
 		
 		//Reference the other interfaces
@@ -79,8 +81,10 @@ public class Interface_login extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Membre membreConnecte = loginAccepter(txtEmail.getText(), txtMdp.getText());
-				if (membreConnecte != null)
+				if (membreConnecte != null){
 					System.out.println(membreConnecte.getMail() + " - " + membreConnecte.getNom() + " is Logged in");
+					parent.log_In_User();
+				}
 				else
 					System.out.println("Non login");
 			}

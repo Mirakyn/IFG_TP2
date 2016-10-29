@@ -1,5 +1,4 @@
 package view;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
@@ -29,6 +28,9 @@ public class Interface_login extends JFrame {
 	private Interface_Manager parent;
 	private Serveur serveur;
 	
+	// Interface Reference
+	private Interface_Inscription inscription_Frame;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -52,6 +54,9 @@ public class Interface_login extends JFrame {
 		// Reference the parent & server
 		this.parent = parent;
 		this.serveur = serveur;
+		
+		//Reference the other interfaces
+		inscription_Frame = null;
 		
 		// Init the Frame
 		setResizable(false);
@@ -95,7 +100,7 @@ public class Interface_login extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO : Lancer interface inscription ici
+				create_Inscription_Interface ();
 			}
 		});
 		
@@ -124,6 +129,18 @@ public class Interface_login extends JFrame {
 		JLabel lblPassword = new JLabel("Mot de passe");
 		lblPassword.setBounds(282, 53, 100, 14);
 		contentPane.add(lblPassword);
+	}
+	
+	/**
+	 * Hash the password to send to server
+	 * @param password to hash
+	 * @return password hashed
+	 */
+	private String hash_Password (String password){
+		
+		String hashed_Password = org.apache.commons.codec.digest.DigestUtils.sha256Hex(password);
+		
+		return hashed_Password;
 	}
 	
 	private Membre loginAccepter(String login, String password)
@@ -176,7 +193,7 @@ public class Interface_login extends JFrame {
 			}
 			
 			// Verification du mot de passe.
-			passwordOK = BDpassword.equals(password);
+			passwordOK = BDpassword.equals(hash_Password(password));
 			
 			// Si le mot de passe est correct.
 			if (passwordOK)
@@ -190,10 +207,22 @@ public class Interface_login extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        
-        serveur.endTransaction();
-        serveur.endConnection();
-        
+
 	    return null;
+	}
+	
+	public void create_Inscription_Interface (){
+		try{
+			inscription_Frame = new Interface_Inscription(this, serveur);
+			this.setVisible(false);
+			inscription_Frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void destroye_Child (Interface_Inscription child){
+		inscription_Frame.setVisible(false);
+		inscription_Frame = null;
 	}
 }

@@ -31,7 +31,7 @@ public class Interface_Applicative extends JFrame {
 		this.parent = parent;
 		this.serveur = serveur;
 		// disable the close of the inscription frame by the user
-		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		tabbedPane = new JTabbedPane (JTabbedPane.TOP);
 		setSize(800, 600);

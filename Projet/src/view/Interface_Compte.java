@@ -1,18 +1,17 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JSplitPane;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 import javax.swing.JTextField;
-import java.awt.Dimension;
 import javax.swing.SwingConstants;
-import java.awt.Component;
 
 public class Interface_Compte extends JDialog {
 	private static final long serialVersionUID = 1L;

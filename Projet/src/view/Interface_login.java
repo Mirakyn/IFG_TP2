@@ -1,5 +1,4 @@
 package view;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
@@ -78,7 +77,7 @@ public class Interface_login extends JFrame {
 				Membre membreConnecte = loginAccepter(txtEmail.getText(), txtMdp.getText());
 				if (membreConnecte != null){
 					System.out.println(membreConnecte.getMail() + " - " + membreConnecte.getNom() + " is Logged in");
-					parent.log_In_User();
+					parent.log_In_User(membreConnecte);
 				}
 				else
 					System.out.println("Non login");

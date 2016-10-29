@@ -1,5 +1,6 @@
 package view;
 
+import model.Membre;
 import server.Serveur;
 
 public class Interface_Manager {
@@ -19,9 +20,9 @@ public class Interface_Manager {
 		}
 	}
 	
-	public void log_In_User (){
+	public void log_In_User (Membre membre){
 		try {
-			Interface_Applicative appli = new Interface_Applicative(this, serveur);
+			Interface_Applicative appli = new Interface_Applicative(this, serveur, membre);
 			appli.setVisible(true);
 			logging.setVisible(false);
 		} catch (Exception e) {

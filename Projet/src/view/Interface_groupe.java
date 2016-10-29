@@ -3,30 +3,18 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
-<<<<<<< HEAD
-import java.awt.EventQueue;
-
-import javax.swing.AbstractListModel;
-import javax.swing.JButton;
-=======
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.AbstractListModel;
 import javax.swing.JButton;
-import javax.swing.JFrame;
->>>>>>> master
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-<<<<<<< HEAD
-
-public class Interface_groupe extends JPanel {
-=======
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -35,40 +23,15 @@ import model.Liste_Courses;
 import model.Membre;
 import server.Serveur;
 
-public class Interface_groupe extends JFrame {
+public class Interface_groupe extends JPanel {
+
 	private static final long serialVersionUID = 1L;
-	
-	private JPanel contentPane;
 	
 	private JList<String> listeGroupe, listeMembre, listeListe;
 	
 	private Serveur serveur;
 	private Membre membre;
-	
->>>>>>> master
 
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Interface_groupe frame = new Interface_groupe();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
-
-	/**
-	 * Create the frame.
-	 */
-<<<<<<< HEAD
-	public Interface_groupe() {
-=======
 	public Interface_groupe(final Serveur serveur, final Membre membre) {
 		final ArrayList<Groupe> groupes = new ArrayList<Groupe>();
 		final ArrayList<Liste_Courses> listes = new ArrayList<Liste_Courses>();
@@ -111,8 +74,6 @@ public class Interface_groupe extends JFrame {
 	    
 	    
 		// Init interface
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
->>>>>>> master
 		setBounds(100, 100, 450, 300);
 		setPreferredSize(new Dimension(20, 10));
 		setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -146,16 +107,7 @@ public class Interface_groupe extends JFrame {
 		splitPane_2.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		splitPane.setLeftComponent(splitPane_2);
 		
-<<<<<<< HEAD
-		JList<String> list = new JList<String>();
-		list.setPreferredSize(new Dimension(0, 175));
-		list.setSize(new Dimension(0, 25));
-		list.setMaximumSize(new Dimension(0, 10));
-		list.setMinimumSize(new Dimension(0, 175));
-		list.setModel(new AbstractListModel<String>() {
-			String[] values = new String[] {"Group 1", "Group 2", "Group 3", "..."};
-=======
-		/*final JList<String>*/ listeGroupe = new JList<String> ();
+		 listeGroupe = new JList<String> ();
 		listeGroupe.setPreferredSize(new Dimension(0, 175));
 		listeGroupe.setSize(new Dimension(0, 25));
 		listeGroupe.setMaximumSize(new Dimension(0, 10));
@@ -163,14 +115,9 @@ public class Interface_groupe extends JFrame {
 		listeGroupe.setModel(new AbstractListModel<String>() {
 			private static final long serialVersionUID = 1L;
 			
->>>>>>> master
 			public int getSize() {
 				return groupes.size();
 			}
-<<<<<<< HEAD
-			public String getElementAt(int index) {
-				return values[index];
-=======
 			
 			// Affiche les nom des groupe du membre
 			public String getElementAt(int index) {
@@ -277,7 +224,6 @@ public class Interface_groupe extends JFrame {
 				});
 			    
 			    serveur.endConnection();
->>>>>>> master
 			}
 		});
 		splitPane_2.setRightComponent(listeGroupe);
@@ -306,15 +252,7 @@ public class Interface_groupe extends JFrame {
 		lblNewLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		splitPane_5.setLeftComponent(lblNewLabel);
 		
-<<<<<<< HEAD
-		JList<String> list_1 = new JList<String>();
-		list_1.setPreferredSize(new Dimension(100, 175));
-		list_1.setMaximumSize(new Dimension(2000, 2000));
-		list_1.setMinimumSize(new Dimension(100, 175));
-		list_1.setModel(new AbstractListModel<String>() {
-			String[] values = new String[] {"Member 1", "Member 2", "Member 3", "Member 4", "..."};
-=======
-		/*JList<String>*/ listeMembre = new JList<String>();
+		listeMembre = new JList<String>();
 		listeMembre.setPreferredSize(new Dimension(100, 175));
 		listeMembre.setMaximumSize(new Dimension(2000, 2000));
 		listeMembre.setMinimumSize(new Dimension(100, 175));
@@ -322,7 +260,6 @@ public class Interface_groupe extends JFrame {
 			private static final long serialVersionUID = 1L;
 			
 			String[] values = new String[] {"", "", "", ""};
->>>>>>> master
 			public int getSize() {
 				return values.length;
 			}
@@ -347,19 +284,12 @@ public class Interface_groupe extends JFrame {
 		lblunknown.setHorizontalAlignment(SwingConstants.CENTER);
 		splitPane_6.setLeftComponent(lblunknown);
 		
-<<<<<<< HEAD
-		JList<String> list_2 = new JList<String>();
-		list_2.setPreferredSize(new Dimension(0, 175));
-		list_2.setModel(new AbstractListModel<String>() {
-			String[] values = new String[] {"dsf", "sdfsdf", "sdfs", "dfsd", "fds", "fsdf"};
-=======
-		/*JList<String>*/ listeListe = new JList<String>();
+		listeListe = new JList<String>();
 		listeListe.setPreferredSize(new Dimension(0, 175));
 		listeListe.setModel(new AbstractListModel<String>() {
 			private static final long serialVersionUID = 1L;
 			
 			String[] values = new String[] {"", "", ""};
->>>>>>> master
 			public int getSize() {
 				return values.length;
 			}

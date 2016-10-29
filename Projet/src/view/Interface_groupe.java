@@ -1,33 +1,44 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JScrollPane;
-import javax.swing.JList;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
-import javax.swing.AbstractListModel;
-import javax.swing.JTextField;
-import java.awt.Dimension;
-import javax.swing.SwingConstants;
 import java.awt.Component;
-import javax.swing.JLabel;
-import javax.swing.JInternalFrame;
-import javax.swing.JSplitPane;
+import java.awt.Dimension;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.swing.AbstractListModel;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import model.Groupe;
+import model.Liste_Courses;
+import model.Membre;
+import server.Serveur;
 
 public class Interface_groupe extends JFrame {
-
+	private static final long serialVersionUID = 1L;
+	
 	private JPanel contentPane;
+	
+	private JList<String> listeGroupe, listeMembre, listeListe;
+	
+	private Serveur serveur;
+	private Membre membre;
+	
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -38,12 +49,53 @@ public class Interface_groupe extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
 	 */
-	public Interface_groupe() {
+	public Interface_groupe(final Serveur serveur, final Membre membre) {
+		final ArrayList<Groupe> groupes = new ArrayList<Groupe>();
+		final ArrayList<Liste_Courses> listes = new ArrayList<Liste_Courses>();
+		final ArrayList<Membre> membres = new ArrayList<Membre>();
+		
+		this.serveur = serveur;
+		this.membre = membre;
+		
+		// Connection a la BDD
+		if (this.serveur.connect("dev", "&8IFG145!") == null) {
+			System.out.println("Erreur Connection");
+		}
+		
+		// Recuperer les groupes du membre
+	    String query = "SELECT * \n" +
+	                   "FROM trolley.Contribuer NATURAL JOIN trolley.Groupe \n" +
+	                   "WHERE id_Membre = '" + this.membre.getMail() + "'";
+	    
+	    // Envoi de la requete
+	    ResultSet rs = serveur.ask(query);
+	    
+	    try {
+	    	int BDid;
+	    	String BDnom = "";
+	    	
+	    	while (rs.next())
+	    	{
+	    		BDid = rs.getInt("id_Groupe");
+	    		BDnom = rs.getString("nom_Groupe");
+	    		groupes.add(new Groupe(BDid, BDnom));
+	    		//System.out.println("Groupe " + groupes.get(groupes.size() - 1).getNom() + " chargé");
+	    	}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	    
+	    // Fin de la requete
+	    this.serveur.endTransaction();
+	    this.serveur.endConnection();
+	    
+	    
+		// Init interface
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -80,21 +132,126 @@ public class Interface_groupe extends JFrame {
 		splitPane_2.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		splitPane.setLeftComponent(splitPane_2);
 		
-		JList list = new JList();
-		list.setPreferredSize(new Dimension(0, 175));
-		list.setSize(new Dimension(0, 25));
-		list.setMaximumSize(new Dimension(0, 10));
-		list.setMinimumSize(new Dimension(0, 175));
-		list.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Group 1", "Group 2", "Group 3", "..."};
+		/*final JList<String>*/ listeGroupe = new JList<String> ();
+		listeGroupe.setPreferredSize(new Dimension(0, 175));
+		listeGroupe.setSize(new Dimension(0, 25));
+		listeGroupe.setMaximumSize(new Dimension(0, 10));
+		listeGroupe.setMinimumSize(new Dimension(0, 175));
+		listeGroupe.setModel(new AbstractListModel<String>() {
+			private static final long serialVersionUID = 1L;
+			
 			public int getSize() {
-				return values.length;
+				return groupes.size();
 			}
-			public Object getElementAt(int index) {
-				return values[index];
+			
+			// Affiche les nom des groupe du membre
+			public String getElementAt(int index) {
+				return groupes.get(index).getNom();
 			}
 		});
-		splitPane_2.setRightComponent(list);
+		
+		// Appeller lorsque la selection de la liste change.
+		listeGroupe.addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				
+				// Connection a la BDD
+				if (serveur.connect("dev", "&8IFG145!") == null) {
+					System.out.println("Erreur Connection");
+				}
+				
+				// Vider liste precedente
+				listes.clear();
+				membres.clear();
+				
+				// ID du groupe selectionne
+				int groupeID = groupes.get(listeGroupe.getSelectedIndex()).getID();
+				
+				// Recuperer les listes du groupe selectionné
+			    String query = "SELECT * \n" +
+			                   "FROM trolley.Liste \n" +
+			                   "WHERE id_Groupe = " + groupeID;
+			    
+			    // Envoi de la requete
+			    ResultSet rs = serveur.ask(query);
+			    
+			    try {
+			    	int BDid;
+			    	int BDidGroupe;
+			    	String BDnom = "";
+			    	
+			    	while (rs.next())
+			    	{
+			    		BDid = rs.getInt("id_Liste");
+			    		BDidGroupe = rs.getInt("id_Groupe");
+			    		BDnom = rs.getString("nom_Liste");
+			    		listes.add(new Liste_Courses(BDid, BDidGroupe, BDnom));
+			    		System.out.println("Liste " + listes.get(listes.size() - 1).getNom() + " chargé");
+			    	}
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			    
+			    // Fin de la requete
+			    serveur.endTransaction();
+			    
+			    // Mise a jour de la list
+			    listeListe.setModel(new AbstractListModel<String>() {
+					private static final long serialVersionUID = 1L;
+					
+					public int getSize() {
+						return listes.size();
+					}
+					public String getElementAt(int index) {
+						return listes.get(index).getNom();
+					}
+				});
+			    
+			    // Recuperer les listes du groupe selectionné
+			    query = 	"SELECT mail_Membre, nom_Membre \n" +
+			                "FROM trolley.Groupe AS g, trolley.Contribuer AS c, trolley.Membre AS m \n" +
+			                "WHERE g.id_Groupe = c.id_Groupe AND " +
+			                "c.id_membre = m.mail_Membre AND " +
+			                "g.id_Groupe = " + groupeID + " AND " +
+			                "m.mail_Membre != '" + membre.getMail() + "'";
+			    
+			    // Envoi de la requete
+			    rs = serveur.ask(query);
+			    
+			    try {
+			    	String BDmail = "";
+			    	String BDnom = "";
+			    	
+			    	while (rs.next())
+			    	{
+			    		BDmail = rs.getString("mail_Membre");
+			    		BDnom = rs.getString("nom_Membre");
+			    		membres.add(new Membre(BDmail, BDnom));
+			    		System.out.println("Membre du groupe " + membres.get(membres.size() - 1).getNom() + " chargé");
+			    	}
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			    
+			    serveur.endTransaction();
+			    
+			    // Mise a jour de la liste
+			    listeMembre.setModel(new AbstractListModel<String>() {
+					private static final long serialVersionUID = 1L;
+					
+					public int getSize() {
+						return membres.size();
+					}
+					public String getElementAt(int index) {
+						return membres.get(index).getNom();
+					}
+				});
+			    
+			    serveur.endConnection();
+			}
+		});
+		splitPane_2.setRightComponent(listeGroupe);
 		
 		JLabel lblGroupesAssocis = new JLabel("Associated Groups");
 		lblGroupesAssocis.setPreferredSize(new Dimension(100, 14));
@@ -120,20 +277,22 @@ public class Interface_groupe extends JFrame {
 		lblNewLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		splitPane_5.setLeftComponent(lblNewLabel);
 		
-		JList list_1 = new JList();
-		list_1.setPreferredSize(new Dimension(100, 175));
-		list_1.setMaximumSize(new Dimension(2000, 2000));
-		list_1.setMinimumSize(new Dimension(100, 175));
-		list_1.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Member 1", "Member 2", "Member 3", "Member 4", "..."};
+		/*JList<String>*/ listeMembre = new JList<String>();
+		listeMembre.setPreferredSize(new Dimension(100, 175));
+		listeMembre.setMaximumSize(new Dimension(2000, 2000));
+		listeMembre.setMinimumSize(new Dimension(100, 175));
+		listeMembre.setModel(new AbstractListModel<String>() {
+			private static final long serialVersionUID = 1L;
+			
+			String[] values = new String[] {"", "", "", ""};
 			public int getSize() {
 				return values.length;
 			}
-			public Object getElementAt(int index) {
+			public String getElementAt(int index) {
 				return values[index];
 			}
 		});
-		splitPane_5.setRightComponent(list_1);
+		splitPane_5.setRightComponent(listeMembre);
 		
 		JButton btnNewList = new JButton("New List");
 		splitPane_3.setRightComponent(btnNewList);
@@ -150,18 +309,20 @@ public class Interface_groupe extends JFrame {
 		lblunknown.setHorizontalAlignment(SwingConstants.CENTER);
 		splitPane_6.setLeftComponent(lblunknown);
 		
-		JList list_2 = new JList();
-		list_2.setPreferredSize(new Dimension(0, 175));
-		list_2.setModel(new AbstractListModel() {
-			String[] values = new String[] {"dsf", "sdfsdf", "sdfs", "dfsd", "fds", "fsdf"};
+		/*JList<String>*/ listeListe = new JList<String>();
+		listeListe.setPreferredSize(new Dimension(0, 175));
+		listeListe.setModel(new AbstractListModel<String>() {
+			private static final long serialVersionUID = 1L;
+			
+			String[] values = new String[] {"", "", ""};
 			public int getSize() {
 				return values.length;
 			}
-			public Object getElementAt(int index) {
+			public String getElementAt(int index) {
 				return values[index];
 			}
 		});
-		splitPane_6.setRightComponent(list_2);
+		splitPane_6.setRightComponent(listeListe);
 		
 		JButton btnCheckList = new JButton("Check List");
 		splitPane_4.setRightComponent(btnCheckList);

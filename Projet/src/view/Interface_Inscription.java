@@ -4,13 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-<<<<<<< HEAD
-=======
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
->>>>>>> master
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -19,11 +16,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-<<<<<<< HEAD
-=======
+
+
+
+
 
 import server.Serveur;
->>>>>>> master
 
 public class Interface_Inscription extends JDialog {
 
@@ -34,15 +32,11 @@ public class Interface_Inscription extends JDialog {
 	private JTextField textField_3;
 	private JTextField textField_4;
 
-<<<<<<< HEAD
-=======
 	// Server reference
 	private Serveur serveur;
 	
 	// parent interface reference
 	private Interface_login parent;
-	
->>>>>>> master
 	/**
 	 * Create the dialog.
 	 */

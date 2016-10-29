@@ -3,13 +3,9 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
-<<<<<<< HEAD
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-=======
-import java.awt.EventQueue;
->>>>>>> master
 
 import javax.swing.AbstractListModel;
 import javax.swing.JButton;
@@ -19,7 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-<<<<<<< HEAD
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -79,31 +74,6 @@ public class Interface_groupe extends JPanel {
 	    
 	    
 		// Init interface
-=======
-
-public class Interface_groupe extends JPanel {
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Interface_groupe frame = new Interface_groupe();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public Interface_groupe() {
->>>>>>> master
 		setBounds(100, 100, 450, 300);
 		setPreferredSize(new Dimension(20, 10));
 		setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -137,7 +107,7 @@ public class Interface_groupe extends JPanel {
 		splitPane_2.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		splitPane.setLeftComponent(splitPane_2);
 		
-<<<<<<< HEAD
+
 		 listeGroupe = new JList<String> ();
 		listeGroupe.setPreferredSize(new Dimension(0, 175));
 		listeGroupe.setSize(new Dimension(0, 25));
@@ -145,20 +115,10 @@ public class Interface_groupe extends JPanel {
 		listeGroupe.setMinimumSize(new Dimension(0, 175));
 		listeGroupe.setModel(new AbstractListModel<String>() {
 			private static final long serialVersionUID = 1L;
-			
-=======
-		JList<String> list = new JList<String>();
-		list.setPreferredSize(new Dimension(0, 175));
-		list.setSize(new Dimension(0, 25));
-		list.setMaximumSize(new Dimension(0, 10));
-		list.setMinimumSize(new Dimension(0, 175));
-		list.setModel(new AbstractListModel<String>() {
-			String[] values = new String[] {"Group 1", "Group 2", "Group 3", "..."};
->>>>>>> master
+
 			public int getSize() {
-				return values.length;
+				return groupes.size();
 			}
-<<<<<<< HEAD
 			
 			// Affiche les nom des groupe du membre
 			public String getElementAt(int index) {
@@ -265,13 +225,9 @@ public class Interface_groupe extends JPanel {
 				});
 			    
 			    serveur.endConnection();
-=======
-			public String getElementAt(int index) {
-				return values[index];
->>>>>>> master
 			}
 		});
-		splitPane_2.setRightComponent(list);
+		splitPane_2.setRightComponent(listeMembre);
 		
 		JLabel lblGroupesAssocis = new JLabel("Associated Groups");
 		lblGroupesAssocis.setPreferredSize(new Dimension(100, 14));
@@ -297,7 +253,6 @@ public class Interface_groupe extends JPanel {
 		lblNewLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		splitPane_5.setLeftComponent(lblNewLabel);
 		
-<<<<<<< HEAD
 		listeMembre = new JList<String>();
 		listeMembre.setPreferredSize(new Dimension(100, 175));
 		listeMembre.setMaximumSize(new Dimension(2000, 2000));
@@ -306,14 +261,6 @@ public class Interface_groupe extends JPanel {
 			private static final long serialVersionUID = 1L;
 			
 			String[] values = new String[] {"", "", "", ""};
-=======
-		JList<String> list_1 = new JList<String>();
-		list_1.setPreferredSize(new Dimension(100, 175));
-		list_1.setMaximumSize(new Dimension(2000, 2000));
-		list_1.setMinimumSize(new Dimension(100, 175));
-		list_1.setModel(new AbstractListModel<String>() {
-			String[] values = new String[] {"Member 1", "Member 2", "Member 3", "Member 4", "..."};
->>>>>>> master
 			public int getSize() {
 				return values.length;
 			}
@@ -321,7 +268,7 @@ public class Interface_groupe extends JPanel {
 				return values[index];
 			}
 		});
-		splitPane_5.setRightComponent(list_1);
+		splitPane_5.setRightComponent(listeMembre);
 		
 		JButton btnNewList = new JButton("New List");
 		splitPane_3.setRightComponent(btnNewList);
@@ -338,19 +285,12 @@ public class Interface_groupe extends JPanel {
 		lblunknown.setHorizontalAlignment(SwingConstants.CENTER);
 		splitPane_6.setLeftComponent(lblunknown);
 		
-<<<<<<< HEAD
 		listeListe = new JList<String>();
 		listeListe.setPreferredSize(new Dimension(0, 175));
 		listeListe.setModel(new AbstractListModel<String>() {
 			private static final long serialVersionUID = 1L;
 			
 			String[] values = new String[] {"", "", ""};
-=======
-		JList<String> list_2 = new JList<String>();
-		list_2.setPreferredSize(new Dimension(0, 175));
-		list_2.setModel(new AbstractListModel<String>() {
-			String[] values = new String[] {"dsf", "sdfsdf", "sdfs", "dfsd", "fds", "fsdf"};
->>>>>>> master
 			public int getSize() {
 				return values.length;
 			}
@@ -358,7 +298,7 @@ public class Interface_groupe extends JPanel {
 				return values[index];
 			}
 		});
-		splitPane_6.setRightComponent(list_2);
+		splitPane_6.setRightComponent(listeListe);
 		
 		JButton btnCheckList = new JButton("Check List");
 		splitPane_4.setRightComponent(btnCheckList);

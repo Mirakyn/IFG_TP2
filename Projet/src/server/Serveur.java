@@ -30,6 +30,12 @@ public class Serveur {
 	public Serveur (String adresse_Serveur, int port_Serveur){
 		this.adresse_Serveur = adresse_Serveur;
 		this.port_Serveur = port_Serveur;
+		
+		/*this.con = connect("dev", "&8IFG145!");
+		if (this.con == null)
+			System.out.println("Erreur de connection");
+		else
+			System.out.println("Connecté");*/
 	}
 	
 	// Méthodes
@@ -66,13 +72,32 @@ public class Serveur {
 		
 		try {
 			// Creation du 'statement'
+			this.stmt = this.con.createStatement();
+			
+			// Execution de la requete
+			result = this.stmt.executeQuery(query);
+		} catch (SQLException e ) { // Echec de la requete
+			e.printStackTrace();
+			result = null;
+		}
+		
+		return result;
+	}
+	
+	public int insert(String query)
+	{
+		this.stmt = null;
+		int result = 0;
+		
+		try {
+			// Creation du 'statement'
 	        this.stmt = this.con.createStatement();
 	        
 	        // Execution de la requete
-	        result = this.stmt.executeQuery(query);
+	        result = this.stmt.executeUpdate(query);
 		} catch (SQLException e ) { // Echec de la requete
 	    	e.printStackTrace();
-	    	result = null;
+	    	result = 0;
 		}
 		
 		return result;
@@ -89,8 +114,6 @@ public class Serveur {
 			} 
         	
         	stmt = null;
-        	
-        	
         }
 	}
 	

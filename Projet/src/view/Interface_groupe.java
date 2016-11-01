@@ -31,14 +31,17 @@ public class Interface_groupe extends JPanel {
 	
 	private Serveur serveur;
 	private Membre membre;
+	
+	private Interface_Applicative interface_applicative;
 
-	public Interface_groupe(final Serveur serveur, final Membre membre) {
+	public Interface_groupe(final Serveur serveur, final Membre membre, final Interface_Applicative interface_applicative) {
 		final ArrayList<Groupe> groupes = new ArrayList<Groupe>();
 		final ArrayList<Liste_Courses> listes = new ArrayList<Liste_Courses>();
 		final ArrayList<Membre> membres = new ArrayList<Membre>();
 		
 		this.serveur = serveur;
 		this.membre = membre;
+		this.interface_applicative = interface_applicative;
 		
 		// Connection a la BDD
 		if (this.serveur.connect("dev", "&8IFG145!") == null) {
@@ -182,7 +185,7 @@ public class Interface_groupe extends JPanel {
 					public String getElementAt(int index) {
 						return listes.get(index).getNom();
 					}
-				});
+				});			    
 			    
 			    // Recuperer les listes du groupe selectionné
 			    query = 	"SELECT mail_Membre, nom_Membre \n" +
@@ -227,6 +230,7 @@ public class Interface_groupe extends JPanel {
 			    serveur.endConnection();
 			}
 		});
+		
 		splitPane_2.setRightComponent(listeGroupe);
 		
 		JLabel lblGroupesAssocis = new JLabel("Associated Groups");
@@ -298,6 +302,17 @@ public class Interface_groupe extends JPanel {
 				return values[index];
 			}
 		});
+
+	    listeListe.addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				interface_applicative.getInterface_listes().chargerListe (listes.get(listeListe.getSelectedIndex()).getID());
+				interface_applicative.switch_To_Listes();
+				
+			}
+		});
+		
 		splitPane_6.setRightComponent(listeListe);
 		
 		JButton btnCheckList = new JButton("Check List");

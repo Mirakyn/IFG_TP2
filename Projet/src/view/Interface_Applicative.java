@@ -14,6 +14,7 @@ public class Interface_Applicative extends JFrame {
 	private Interface_Manager parent;
 	private Serveur serveur;
 	private Membre membre;
+	private Interface_Liste interface_listes;
 	
 	public Interface_Applicative (Interface_Manager parent, Serveur serveur, Membre membre){
 		this.parent = parent;
@@ -27,14 +28,27 @@ public class Interface_Applicative extends JFrame {
 		
 
 		//Add the panes
-		tabbedPane.addTab ("Interface_Groupe", new Interface_groupe(serveur, membre));
-		tabbedPane.add ("Interface_Listes", new Interface_Liste());
+		interface_listes = new Interface_Liste(serveur);
+		tabbedPane.addTab ("Interface_Groupe", new Interface_groupe(serveur, membre, this));
+		tabbedPane.add ("Interface_Listes", interface_listes);
 		
 		add(tabbedPane, BorderLayout.CENTER);
 		getContentPane().add(tabbedPane);
 		
 		
 		System.out.println(getSize() + "    " + tabbedPane.getSize());
+	}
+
+	public Interface_Liste getInterface_listes() {
+		return interface_listes;
+	}
+
+	public void setInterface_listes(Interface_Liste interface_listes) {
+		this.interface_listes = interface_listes;
+	}
+	
+	public void switch_To_Listes (){
+		tabbedPane.setSelectedIndex(1);
 	}
 	
 }

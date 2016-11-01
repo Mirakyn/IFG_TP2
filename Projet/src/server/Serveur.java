@@ -128,6 +128,7 @@ public class Serveur {
              }
 
              con = null;
+             //System.out.println("Fin Connexion");
          }
 	}
 	

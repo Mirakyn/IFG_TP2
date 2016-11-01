@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="commons-codec-1.10/commons-codec-1.10.jar"/>
 	<classpathentry kind="lib" path="JDBC-mysql-connector/mysql-connector-java-5.1.40-bin.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/Sciencus/workspace/GenieLogTP2/IFG_TP2/JDBC-mysql-connector/mysql-connector-java-5.1.40-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

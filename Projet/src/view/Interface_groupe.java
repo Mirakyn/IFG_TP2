@@ -35,6 +35,7 @@ public class Interface_groupe extends JPanel {
 	private Interface_Applicative interface_applicative;
 
 	public Interface_groupe(final Serveur serveur, final Membre membre, final Interface_Applicative interface_applicative) {
+		setSize(new Dimension(500, 500));
 		final ArrayList<Groupe> groupes = new ArrayList<Groupe>();
 		final ArrayList<Liste_Courses> listes = new ArrayList<Liste_Courses>();
 		final ArrayList<Membre> membres = new ArrayList<Membre>();
@@ -78,7 +79,7 @@ public class Interface_groupe extends JPanel {
 	    
 		// Init interface
 		setBounds(100, 100, 450, 300);
-		setPreferredSize(new Dimension(20, 10));
+		setPreferredSize(new Dimension(603, 515));
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(new BorderLayout(0, 0));
 		
@@ -107,13 +108,14 @@ public class Interface_groupe extends JPanel {
 		splitPane_1.setRightComponent(btnAddGroup);
 		
 		JSplitPane splitPane_2 = new JSplitPane();
+		splitPane_2.setSize(new Dimension(200, 400));
 		splitPane_2.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		splitPane.setLeftComponent(splitPane_2);
 		
 
 		 listeGroupe = new JList<String> ();
-		listeGroupe.setPreferredSize(new Dimension(0, 175));
-		listeGroupe.setSize(new Dimension(0, 25));
+		listeGroupe.setPreferredSize(new Dimension(0, 425));
+		listeGroupe.setSize(new Dimension(200, 400));
 		listeGroupe.setMaximumSize(new Dimension(0, 10));
 		listeGroupe.setMinimumSize(new Dimension(0, 175));
 		listeGroupe.setModel(new AbstractListModel<String>() {
@@ -258,7 +260,7 @@ public class Interface_groupe extends JPanel {
 		splitPane_5.setLeftComponent(lblNewLabel);
 		
 		listeMembre = new JList<String>();
-		listeMembre.setPreferredSize(new Dimension(100, 175));
+		listeMembre.setPreferredSize(new Dimension(150, 425));
 		listeMembre.setMaximumSize(new Dimension(2000, 2000));
 		listeMembre.setMinimumSize(new Dimension(100, 175));
 		listeMembre.setModel(new AbstractListModel<String>() {
@@ -290,7 +292,7 @@ public class Interface_groupe extends JPanel {
 		splitPane_6.setLeftComponent(lblunknown);
 		
 		listeListe = new JList<String>();
-		listeListe.setPreferredSize(new Dimension(0, 175));
+		listeListe.setPreferredSize(new Dimension(0, 425));
 		listeListe.setModel(new AbstractListModel<String>() {
 			private static final long serialVersionUID = 1L;
 			

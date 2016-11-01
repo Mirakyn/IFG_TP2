@@ -51,13 +51,16 @@ public class Interface_Liste extends JPanel {
 	 * @throws SQLException 
 	 */
 	public Interface_Liste(Serveur serveur) {
+		setSize(new Dimension(777, 488));
 		
 		this.serveur = serveur;
 		setLayout(null);
 		listes = new ArrayList<Produit> ();
 		
 		JSplitPane splitPane_6 = new JSplitPane();
-		splitPane_6.setBounds(61, 5, 500, 46);
+		splitPane_6.setSize(new Dimension(203, 30));
+		splitPane_6.setPreferredSize(new Dimension(203, 30));
+		splitPane_6.setBounds(61, 5, 704, 47);
 		splitPane_6.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		add(splitPane_6);
 		
@@ -69,7 +72,7 @@ public class Interface_Liste extends JPanel {
 		
 		JLabel lblGroupListProduct = new JLabel("Group List Product");
 		lblGroupListProduct.setHorizontalAlignment(SwingConstants.CENTER);
-		lblGroupListProduct.setPreferredSize(new Dimension(122, 18));
+		lblGroupListProduct.setPreferredSize(new Dimension(142, 18));
 		splitPane_8.setLeftComponent(lblGroupListProduct);
 		
 		JLabel lblProductDetail = new JLabel("Product Details");
@@ -79,7 +82,7 @@ public class Interface_Liste extends JPanel {
 		
 		JLabel lblProductList = new JLabel("Product List");
 		lblProductList.setHorizontalAlignment(SwingConstants.CENTER);
-		lblProductList.setPreferredSize(new Dimension(118, 18));
+		lblProductList.setPreferredSize(new Dimension(160, 18));
 		splitPane_7.setLeftComponent(lblProductList);
 		
 		JLabel lblListManagement = new JLabel("List Management");
@@ -88,7 +91,7 @@ public class Interface_Liste extends JPanel {
 		splitPane_6.setLeftComponent(lblListManagement);
 		
 		JSplitPane splitPane = new JSplitPane();
-		splitPane.setBounds(62, 57, 162, 256);
+		splitPane.setBounds(62, 57, 162, 417);
 		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		add(splitPane);
 		
@@ -96,7 +99,7 @@ public class Interface_Liste extends JPanel {
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setMinimumSize(new Dimension(0, 200));
 		list.setMaximumSize(new Dimension(0, 200));
-		list.setPreferredSize(new Dimension(0, 180));
+		list.setPreferredSize(new Dimension(0, 375));
 		
 		list.addListSelectionListener(new ListSelectionListener() {
 			
@@ -124,48 +127,48 @@ public class Interface_Liste extends JPanel {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_1.setBounds(376, 57, 185, 256);
+		panel_1.setBounds(376, 57, 389, 417);
 		add(panel_1);
 		panel_1.setLayout(null);
 		
 		textField = new JTextField();
-		textField.setBounds(95, 11, 86, 20);
+		textField.setBounds(157, 57, 200, 20);
 		panel_1.add(textField);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(95, 42, 86, 20);
+		textField_1.setBounds(157, 88, 200, 20);
 		panel_1.add(textField_1);
 		textField_1.setColumns(10);
 		
 		textField_2 = new JTextField();
-		textField_2.setBounds(95, 104, 86, 106);
+		textField_2.setBounds(157, 170, 200, 150);
 		panel_1.add(textField_2);
 		textField_2.setColumns(10);
 		
 		textField_3 = new JTextField();
-		textField_3.setBounds(95, 73, 86, 20);
+		textField_3.setBounds(157, 119, 200, 20);
 		panel_1.add(textField_3);
 		textField_3.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Description :");
-		lblNewLabel.setBounds(10, 107, 75, 14);
+		lblNewLabel.setBounds(37, 238, 75, 14);
 		panel_1.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Quantity:");
-		lblNewLabel_1.setBounds(10, 76, 75, 14);
+		lblNewLabel_1.setBounds(37, 122, 75, 14);
 		panel_1.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Price:");
-		lblNewLabel_2.setBounds(10, 45, 75, 14);
+		lblNewLabel_2.setBounds(37, 91, 75, 14);
 		panel_1.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Name:");
-		lblNewLabel_3.setBounds(10, 14, 75, 14);
+		lblNewLabel_3.setBounds(37, 60, 75, 14);
 		panel_1.add(lblNewLabel_3);
 		
 		JButton btnAdd_1 = new JButton("Add");
-		btnAdd_1.setBounds(10, 216, 51, 31);
+		btnAdd_1.setBounds(37, 375, 100, 31);
 		panel_1.add(btnAdd_1);
 		btnAdd_1.addActionListener(new ActionListener() {
 			
@@ -180,16 +183,16 @@ public class Interface_Liste extends JPanel {
 		});
 		
 		JButton btnEdit = new JButton("Edit");
-		btnEdit.setBounds(62, 217, 51, 30);
+		btnEdit.setBounds(147, 375, 100, 30);
 		panel_1.add(btnEdit);
 		
 		JButton btnDelete_1 = new JButton("Delete");
-		btnDelete_1.setBounds(115, 217, 66, 30);
+		btnDelete_1.setBounds(257, 375, 100, 30);
 		panel_1.add(btnDelete_1);
 		
 		JList<String> list_2 = new JList<String>();
 		list_2.setBorder(new LineBorder(new Color(0, 0, 0)));
-		list_2.setBounds(227, 57, 145, 256);
+		list_2.setBounds(227, 57, 145, 417);
 		add(list_2);
 		list_2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list_2.setPreferredSize(new Dimension(0, 180));

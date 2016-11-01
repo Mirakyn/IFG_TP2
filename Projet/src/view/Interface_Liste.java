@@ -42,6 +42,7 @@ public class Interface_Liste extends JPanel {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
+	private JLabel lblNewLabel_4;
 
 	//Liste dans laquelle on est
 	private int id_Liste;
@@ -109,6 +110,7 @@ public class Interface_Liste extends JPanel {
 				textField_1.setText(String.valueOf(listes.get(list.getSelectedIndex()).getPrice()));
 				textField_3.setText(String.valueOf(listes.get(list.getSelectedIndex()).getQuantite()));
 				textField_2.setText(listes.get(list.getSelectedIndex()).getDescription());
+			    lblNewLabel_4.setText("");
 			}
 		});
 		
@@ -174,6 +176,7 @@ public class Interface_Liste extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+			    lblNewLabel_4.setText("");
 				AjoutProduit(textField.getText(),
 							Float.valueOf(textField_1.getText()),
 							Integer.valueOf(textField_3.getText()),
@@ -189,6 +192,10 @@ public class Interface_Liste extends JPanel {
 		JButton btnDelete_1 = new JButton("Delete");
 		btnDelete_1.setBounds(257, 375, 100, 30);
 		panel_1.add(btnDelete_1);
+		
+		lblNewLabel_4 = new JLabel("");
+		lblNewLabel_4.setBounds(38, 345, 100, 14);
+		panel_1.add(lblNewLabel_4);
 		
 		JList<String> list_2 = new JList<String>();
 		list_2.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -212,6 +219,9 @@ public class Interface_Liste extends JPanel {
 	
 	private void AjoutProduit (String name, float price, int qtt, String description){
 		// Connection au serveur
+		String insert_Text = "";
+	    lblNewLabel_4.setText(insert_Text);
+	    
 		if (this.serveur.connect("dev", "&8IFG145!") == null) 
 		{
 			System.out.println("Erreur Connection");
@@ -222,31 +232,15 @@ public class Interface_Liste extends JPanel {
 		}
 		
 		// Preparation de la requete
-	    String query = "INSERT INTO trolley.Produit (nom_Produit, prix_Produit, quantie_Produit, description_Produit)" +
-	    				"VALUES ('" + name + "'," + price + "," + qtt + ",'" + description + "');";
+	    
+	    String query = "CALL trolley.AjouterProduit('" + name + "'," + price + "," + qtt + ",'" + description + "'," + id_Liste + ");";
+	    
 	    serveur.insert(query);
-	    this.serveur.endTransaction();
-	    
-	    int id_Produit = -1;
-	    String query_2 = "SELECT id_Produit " +
-	    				"FROM trolley.Produit " +
-	    				"WHERE nom_Produit = '" + name + "' AND prix_Produit = " + price + " AND quantie_Produit = '" + qtt + "';";
-	    ResultSet rs = serveur.ask(query_2);
-	    try{
-	    	rs.first();
-	    	id_Produit = rs.getInt("id_Produit");
-	    	System.out.println(id_Produit);
-	    }catch (SQLException e){
-	    	
-	    }
-	    this.serveur.endTransaction();
-	    
-	    String query_3 = "INSERT INTO trolley.Contenir (id_Produit, id_Liste)" +
-				"VALUES (" + id_Produit + "," + id_Liste + ");";
-	    serveur.insert(query_3);
 	    
 	    this.serveur.endTransaction();
 	    this.serveur.endConnection();
+	    
+	    lblNewLabel_4.setText(insert_Text);
 	    
 	    chargerListe (id_Liste);
 	    

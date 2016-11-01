@@ -227,7 +227,7 @@ public class Interface_groupe extends JPanel {
 			    serveur.endConnection();
 			}
 		});
-		splitPane_2.setRightComponent(listeMembre);
+		splitPane_2.setRightComponent(listeGroupe);
 		
 		JLabel lblGroupesAssocis = new JLabel("Associated Groups");
 		lblGroupesAssocis.setPreferredSize(new Dimension(100, 14));
